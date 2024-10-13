@@ -3,9 +3,8 @@ const path = require('path')
 class WebsiteController{
     mainWebsite(req,res,next){
         try {
-            const starterFilePath = path.join(process.cwd(),'storage','frontend','index.html')
             res.status(200);
-            res.sendFile(starterFilePath)
+            res.redirect('http://localhost:3000/frontend/index.html')
         } catch (err) {
             next(err)
         }
