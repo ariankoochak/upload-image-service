@@ -9,12 +9,15 @@ export const fileUploadCountSlice = createSlice({
     initialState,
     reducers: {
         addedNewFile: (state) => {
-                state.fileUploadCount++;
+            state.fileUploadCount++;
         },
+        deletedFile:(state)=>{
+            state.fileUploadCount--;
+        }
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { addedNewFile } = fileUploadCountSlice.actions;
+export const { addedNewFile, deletedFile } = fileUploadCountSlice.actions;
 
 export default fileUploadCountSlice.reducer;
