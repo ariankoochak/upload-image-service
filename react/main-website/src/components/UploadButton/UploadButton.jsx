@@ -5,7 +5,6 @@ import { addedNewFile } from "../../utils/store/slices/fileUploadCount";
 
 export default function UploadButton() {
     const [image, setImage] = useState(null);
-    const [status,setStatus] = useState('');
     const dispatch = useDispatch();
 
     const handleChangeInput = (e) => {
@@ -26,18 +25,16 @@ export default function UploadButton() {
         })
             .then((response) => {
                 if(response.status === 201){
-                    setStatus('image uploaded successfully');
                     setImage(null);
                     dispatch(addedNewFile());
                 }
             })
             .catch((error) => {
-                setStatus("image not uploaded");
+                console.log(error);
             });
     };
     return (
         <>
-            <h2>{status}</h2>
             <input type="file" onChange={handleChangeInput}/>
             <button onClick={handleClickUpload}>uploadImage</button>
         </>
