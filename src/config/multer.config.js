@@ -3,7 +3,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, process.cwd() + "/storage");
+        cb(null, process.cwd() + "/storage/upload");
     },
     filename: async (req, file, cb) => {
         const ext = path.extname(file.originalname);
