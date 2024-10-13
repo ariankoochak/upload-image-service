@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addedNewFile } from "../../utils/store/slices/fileUploadCount";
 
 export default function UploadButton() {
     const [image, setImage] = useState(null);
     const [status,setStatus] = useState('');
+    const dispatch = useDispatch();
 
     const handleChangeInput = (e) => {
         setImage(e.target.files[0]);
@@ -25,6 +28,7 @@ export default function UploadButton() {
                 if(response.status === 201){
                     setStatus('image uploaded successfully');
                     setImage(null);
+                    dispatch(addedNewFile());
                 }
             })
             .catch((error) => {

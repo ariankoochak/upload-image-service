@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import { useSelector } from 'react-redux';
+
 
 
 export default function AllImage() {
     const [images,setImages] = useState([]);
-    useEffect(()=>{
+    const fileUploadCount = useSelector((store) => store.fileUploadCount.fileUploadCount);
+    useEffect(() => {
         const api = "http://localhost:3000/get-data/";
         axios({
             withCredentials: true,
@@ -13,13 +16,13 @@ export default function AllImage() {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    setImages(response.data)
+                    setImages(response.data);
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
-    },[])
+    }, [fileUploadCount]);
 
     const renderImages = ()=>{
         return images.map((imageName)=>{
