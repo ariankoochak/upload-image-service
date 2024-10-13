@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useSelector } from 'react-redux';
+import DeleteButton from '../DeleteButton/DeleteButton';
 
 
 
@@ -27,7 +28,8 @@ export default function AllImage() {
     const renderImages = ()=>{
         return images.map((imageName)=>{
             return <div key={imageName}>
-                <img src={`http://localhost:3000/upload/${imageName}`} alt=""/>
+                <img src={`http://localhost:3000/upload/${imageName}`} alt="" width={200}/>
+                <DeleteButton imageName={imageName}/>
             </div>
         })
     }
