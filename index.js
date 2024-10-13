@@ -5,6 +5,8 @@ const PORT = 3000;
 
 const allRoutes = require("./src/modules/router/routes");
 
+app.use(express.static("storage"));
+
 app.use(allRoutes);
 
 app.listen(PORT, () => {
