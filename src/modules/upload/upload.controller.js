@@ -1,21 +1,39 @@
 const fs = require("fs");
 const path = require("path");
+const sharp = require("sharp");
 
 class UploadController {
-    uploadImage(req, res, next) {
+
+    async resizeImage(req,res,next){
         try {
             if (req.res.locals.fileName !== undefined) {
-                res.status(201);
-                res.send({
-                    message: "image uploaded successfully",
-                    imageName: req.res.locals.fileName,
-                });
+                
+                const filePath = path.join(process.cwd(),"storage","upload",req.res.locals.fileName);
+                const resultPath = path.join(process.cwd(),"storage","upload",`${Date.now()}.png`);
+
+                await sharp(filePath).resize(500).toFormat("png").toFile(resultPath);
+
+                fs.unlinkSync(filePath);
+
+                next();
             } else {
                 throw {
                     status: 400,
                     message: "image not uploaded!",
                 };
             }
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    uploadImage(req, res, next) {
+        try {
+            res.status(201);
+            res.send({
+                message: "image uploaded successfully",
+                imageName: req.res.locals.fileName,
+            });
         } catch (err) {
             next(err);
         }
