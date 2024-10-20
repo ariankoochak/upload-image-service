@@ -1,4 +1,4 @@
-## upload image service wit node js
+## upload image service with node js
 ### usage
 1. `npm i` in main directory
 
